@@ -55,7 +55,7 @@ public class Order {
         UNSUCCESSFUL("unsuccessful"),
         PAID("paid");
 
-        private String statusName;
+        private final String statusName;
 
         Status(String statusName) {
             this.statusName = statusName;
@@ -67,7 +67,7 @@ public class Order {
                     return status;
                 }
             }
-            throw new NoSuchElementException("Can't find status by status name");
+            throw new NoSuchElementException("Can't find status by status name" + statusName);
         }
     }
 

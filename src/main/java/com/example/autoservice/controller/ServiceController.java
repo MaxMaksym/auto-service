@@ -2,6 +2,7 @@ package com.example.autoservice.controller;
 
 import com.example.autoservice.dto.request.ServiceRequestDto;
 import com.example.autoservice.dto.response.ServiceResponseDto;
+import com.example.autoservice.lib.ServiceStatus;
 import com.example.autoservice.mapper.impl.ServiceMapper;
 import com.example.autoservice.model.Service;
 import com.example.autoservice.service.ServiceService;
@@ -43,9 +44,9 @@ public class ServiceController {
     @ApiOperation(value = "Update the status of a service",
             notes = "Updates the wasPaidToMechanic status of a service")
     public ServiceResponseDto updateStatus(@PathVariable Long id,
-                                           @RequestBody Boolean wasPaidToMechanic) {
+                                           @RequestBody @ServiceStatus String status) {
         Service service = serviceService.findById(id);
-        service.setWasPaidToMechanic(wasPaidToMechanic);
+        service.setStatus(Service.Status.getStatus(status.toLowerCase()));
         return serviceMapper.toDto(serviceService.update(service));
     }
 }

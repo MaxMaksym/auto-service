@@ -14,8 +14,8 @@ public class ServiceRequestDto {
     private String name;
     @NotNull
     private Long mechanicId;
-    @Min(0)
+    @Min(1)
     private BigDecimal price;
     @NotNull
-    private Boolean wasPaidToMechanic;
+    private String status;
 }

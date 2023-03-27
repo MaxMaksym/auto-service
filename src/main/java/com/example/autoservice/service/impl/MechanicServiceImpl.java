@@ -37,7 +37,7 @@ public class MechanicServiceImpl implements MechanicService {
         BigDecimal salary = mechanicRepository.calculateSalary(id);
         List<Service> services = serviceRepository.findAllByMechanicId(id);
         services.stream()
-                .peek(service -> service.setWasPaidToMechanic(true))
+                .peek(service -> service.setStatus(Service.Status.PAID))
                 .forEach(serviceRepository::save);
         return salary;
     }

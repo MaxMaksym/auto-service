@@ -1,6 +1,6 @@
 package com.example.autoservice.model;
 
-import com.example.autoservice.model.abstraction.PersonEntity;
+import com.example.autoservice.model.abstraction.Person;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -12,17 +12,7 @@ import lombok.Setter;
 @Table(name = "mechanics")
 @Getter
 @Setter
-public class Mechanic extends PersonEntity {
+public class Mechanic extends Person {
     @OneToMany(mappedBy = "mechanic")
     private List<Service> services;
-
-    public void addService(Service service) {
-        services.add(service);
-        service.setMechanic(this);
-    }
-
-    public void removeService(Service service) {
-        services.remove(service);
-        service.setMechanic(null);
-    }
 }

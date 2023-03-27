@@ -14,7 +14,7 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Query("SELECT s "
             + "FROM Service s "
             + "JOIN Mechanic m ON s.mechanic.id = m.id "
-            + "WHERE s.wasPaidToMechanic = false AND m.id = :mechanicId")
+            + "WHERE s.status = 'UNPAID' AND m.id = :mechanicId")
     List<Service> findAllByMechanicId(@Param("mechanicId") Long mechanicId);
 
     @Override

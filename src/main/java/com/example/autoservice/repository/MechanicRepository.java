@@ -13,6 +13,6 @@ public interface MechanicRepository extends JpaRepository<Mechanic, Long> {
             + "FROM Mechanic m "
             + "JOIN Service s ON s.mechanic.id = m.id "
             + "WHERE m.id = :id "
-            + "AND s.wasPaidToMechanic = false")
+            + "AND s.status = 'UNPAID'")
     BigDecimal calculateSalary(@Param("id") Long id);
 }

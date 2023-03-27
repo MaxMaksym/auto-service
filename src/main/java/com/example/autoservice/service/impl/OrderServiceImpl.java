@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService {
         Service diagnosis = new Service();
         diagnosis.setName(DIAGNOSIS_NAME);
         diagnosis.setPrice(DIAGNOSIS_PRICE);
-        diagnosis.setWasPaidToMechanic(false);
+        diagnosis.setStatus(Service.Status.UNPAID);
         return serviceService.add(diagnosis);
     }
 }

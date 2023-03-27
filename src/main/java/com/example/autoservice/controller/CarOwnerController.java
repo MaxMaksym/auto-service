@@ -47,7 +47,7 @@ public class CarOwnerController {
         return carOwnerMapper.toDto(carOwnerService.update(carOwner));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/orders")
     @ApiOperation(value = "Get all orders for a car owner",
             notes = "Returns a list of all orders associated with the specified car owner ID.")
     public List<OrderResponseDto> getOrders(@PathVariable Long id) {

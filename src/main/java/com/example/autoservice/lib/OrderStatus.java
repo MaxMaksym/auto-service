@@ -1,6 +1,6 @@
 package com.example.autoservice.lib;
 
-import com.example.autoservice.lib.validator.StatusValidator;
+import com.example.autoservice.lib.validator.OrderStatusValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
@@ -10,10 +10,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = StatusValidator.class)
+@Constraint(validatedBy = OrderStatusValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Status {
+public @interface OrderStatus {
     String message() default "Invalid status";
 
     Class<?>[] groups() default {};

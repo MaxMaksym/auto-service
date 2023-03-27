@@ -11,5 +11,5 @@ public class ServiceResponseDto {
     private String name;
     private Long mechanicId;
     private BigDecimal price;
-    private boolean wasPaidToMechanic;
+    private String status;
 }

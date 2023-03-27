@@ -11,6 +11,6 @@ import lombok.Setter;
 public class ProductRequestDto {
     @NotBlank
     private String name;
-    @Min(0)
+    @Min(1)
     private BigDecimal price;
 }

@@ -22,7 +22,7 @@ public class ServiceMapper implements
         service.setName(requestDto.getName());
         service.setMechanic(mechanicService.findById(requestDto.getMechanicId()));
         service.setPrice(requestDto.getPrice());
-        service.setWasPaidToMechanic(requestDto.getWasPaidToMechanic());
+        service.setStatus(Service.Status.getStatus(requestDto.getStatus()));
         return service;
     }
 
@@ -33,7 +33,7 @@ public class ServiceMapper implements
         responseDto.setId(service.getId());
         responseDto.setMechanicId(service.getMechanic().getId());
         responseDto.setPrice(service.getPrice());
-        responseDto.setWasPaidToMechanic(service.getWasPaidToMechanic());
+        responseDto.setStatus(service.getStatus().name());
         return responseDto;
     }
 }

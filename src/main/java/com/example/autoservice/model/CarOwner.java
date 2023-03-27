@@ -1,6 +1,6 @@
 package com.example.autoservice.model;
 
-import com.example.autoservice.model.abstraction.PersonEntity;
+import com.example.autoservice.model.abstraction.Person;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name = "car_owners")
 @Getter
 @Setter
-public class CarOwner extends PersonEntity {
+public class CarOwner extends Person {
     @OneToMany(mappedBy = "carOwner",
             orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
@@ -27,24 +27,7 @@ public class CarOwner extends PersonEntity {
         car.setCarOwner(this);
     }
 
-    public void removeCar(Car car) {
-        cars.remove(car);
-        car.setCarOwner(null);
-    }
-
-    public void addOrder(Order order) {
-        orders.add(order);
-    }
-
-    public void removeOrder(Order order) {
-        orders.remove(order);
-    }
-
     public void addAllCars(List<Car> newCars) {
         newCars.forEach(this::addCar);
-    }
-
-    public void addAllOrders(List<Order> newOrders) {
-        newOrders.forEach(this::addOrder);
     }
 }

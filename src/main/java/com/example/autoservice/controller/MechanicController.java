@@ -41,7 +41,7 @@ public class MechanicController {
         return mechanicMapper.toDto(mechanicService.update(mechanic));
     }
 
-    @GetMapping("/salary/{id}")
+    @GetMapping("/{id}/salary")
     @ApiOperation(value = "Calculate salary for a mechanic",
             notes = "Calculates the salary for the mechanic with the specified ID.")
     public BigDecimal getSalary(@PathVariable Long id) {

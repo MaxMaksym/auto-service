@@ -6,8 +6,10 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 
 public class YearValidator implements ConstraintValidator<Year, Integer> {
+    private static final int MIN_CAR_YEAR = 1950;
+
     @Override
     public boolean isValid(Integer year, ConstraintValidatorContext constraintValidatorContext) {
-        return year > 1950 && year < LocalDate.now().getYear();
+        return year > MIN_CAR_YEAR && year < LocalDate.now().getYear();
     }
 }

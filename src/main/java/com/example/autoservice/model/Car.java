@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 
 @Entity
 @Table(name = "cars")
@@ -34,15 +33,33 @@ public class Car {
         if (this == o) {
             return true;
         }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Car car = (Car) o;
-        return id != null && Objects.equals(id, car.id);
+        if (!id.equals(car.id)) {
+            return false;
+        }
+        if (!Objects.equals(manufacturer, car.manufacturer)) {
+            return false;
+        }
+        if (!Objects.equals(model, car.model)) {
+            return false;
+        }
+        if (!Objects.equals(year, car.year)) {
+            return false;
+        }
+        return Objects.equals(number, car.number);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (year != null ? year.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (carOwner != null ? carOwner.hashCode() : 0);
+        return result;
     }
 }

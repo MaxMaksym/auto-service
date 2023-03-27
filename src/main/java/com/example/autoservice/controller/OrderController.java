@@ -1,16 +1,15 @@
 package com.example.autoservice.controller;
 
-import com.example.autoservice.dto.request.ListOfProductsDto;
-import com.example.autoservice.dto.request.ListOfServicesDto;
 import com.example.autoservice.dto.request.OrderRequestDto;
 import com.example.autoservice.dto.response.OrderResponseDto;
-import com.example.autoservice.lib.Status;
+import com.example.autoservice.lib.OrderStatus;
 import com.example.autoservice.mapper.impl.OrderMapper;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,20 +33,20 @@ public class OrderController {
         return orderMapper.toDto(orderService.add(orderMapper.toModel(requestDto)));
     }
 
-    @PostMapping("/products/{id}")
+    @PostMapping("/{id}/products")
     @ApiOperation(value = "Add products to an order",
             notes = "Adds the specified products to an existing order with the specified ID.")
     public OrderResponseDto addProducts(@PathVariable Long id,
-                                        @RequestBody ListOfProductsDto requestDto) {
-        return orderMapper.toDto(orderService.addProducts(id, requestDto.getProductIds()));
+                                        @RequestBody List<Long> productIds) {
+        return orderMapper.toDto(orderService.addProducts(id, productIds));
     }
 
-    @PostMapping("/services/{id}")
+    @PostMapping("/{id}/services")
     @ApiOperation(value = "Add services to an order",
             notes = "Adds the specified services to an existing order with the specified ID.")
     public OrderResponseDto addServices(@PathVariable Long id,
-                            @RequestBody ListOfServicesDto requestDto) {
-        return orderMapper.toDto(orderService.addServices(id, requestDto.getServiceIds()));
+                            @RequestBody List<Long> serviceIds) {
+        return orderMapper.toDto(orderService.addServices(id, serviceIds));
     }
 
     @PutMapping("/{id}")
@@ -60,17 +59,17 @@ public class OrderController {
         return orderMapper.toDto(orderService.update(order));
     }
 
-    @PutMapping("/status/{id}")
+    @PutMapping("/{id}/status")
     @ApiOperation(value = "Update the status of an order",
             notes = "Updates the status of an existing order with the specified ID.")
     public OrderResponseDto updateStatus(@PathVariable Long id,
-                                         @RequestBody @Status String status) {
+                                         @RequestBody @OrderStatus String status) {
         Order order = orderService.findById(id);
         order.setStatus(Order.Status.getStatus(status.toLowerCase()));
         return orderMapper.toDto(orderService.update(order));
     }
 
-    @GetMapping("/total-price/{id}")
+    @GetMapping("/{id}/total-price")
     @ApiOperation(value = "Get the total price of an order",
             notes = "Returns the total price of an existing order with the specified ID.")
     public BigDecimal getTotalPrice(@PathVariable Long id) {

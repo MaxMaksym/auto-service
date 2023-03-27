@@ -1,29 +1,48 @@
 package com.example.autoservice.model;
 
-import com.example.autoservice.model.abstraction.Offering;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 
 @Entity
 @Table(name = "services")
 @Getter
 @Setter
-public class Service extends Offering {
+public class Service {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private BigDecimal price;
     @ManyToOne(fetch = FetchType.LAZY)
     private Mechanic mechanic;
-    private Boolean wasPaidToMechanic;
+    private Status status;
 
-    public void addMechanic(Mechanic mechanic) {
-        this.mechanic = mechanic;
-        mechanic.addService(this);
-    }
+    public enum Status {
+        PAID("paid"),
+        UNPAID("unpaid");
 
-    public void removeMechanic(Mechanic mechanic) {
-        this.mechanic = null;
-        mechanic.removeService(this);
+        private final String statusName;
+
+        Status(String statusName) {
+            this.statusName = statusName;
+        }
+
+        public static Service.Status getStatus(String statusName) {
+            for (Service.Status status : Service.Status.values()) {
+                if (statusName.equals(status.statusName)) {
+                    return status;
+                }
+            }
+            throw new NoSuchElementException("Can't find status by status name" + statusName);
+        }
     }
 }
