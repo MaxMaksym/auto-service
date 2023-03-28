@@ -16,6 +16,4 @@ public class ServiceRequestDto {
     private Long mechanicId;
     @Min(1)
     private BigDecimal price;
-    @NotNull
-    private String status;
 }

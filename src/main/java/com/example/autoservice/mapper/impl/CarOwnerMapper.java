@@ -8,6 +8,7 @@ import com.example.autoservice.model.Car;
 import com.example.autoservice.model.CarOwner;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.service.CarService;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,8 @@ public class CarOwnerMapper implements RequestDtoMapper<CarOwnerRequestDto, CarO
     public CarOwner toModel(CarOwnerRequestDto requestDto) {
         CarOwner carOwner = new CarOwner();
         carOwner.setFullName(requestDto.getFullName());
-        carOwner.addAllCars(requestDto.getCarIds().stream()
-                .map(carService::findById)
-                .collect(Collectors.toList()));
+        List<Car> cars = carService.findAllById(requestDto.getCarIds());
+        carOwner.addAllCars(cars);
         return carOwner;
     }
 

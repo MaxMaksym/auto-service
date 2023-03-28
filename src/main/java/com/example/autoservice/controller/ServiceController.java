@@ -27,7 +27,7 @@ public class ServiceController {
     @ApiOperation(value = "Add a new service",
             notes = "Adds a new service with the specified details.")
     public ServiceResponseDto add(@RequestBody @Valid ServiceRequestDto requestDto) {
-        return serviceMapper.toDto(serviceService.add(serviceMapper.toModel(requestDto)));
+        return serviceMapper.toDto(serviceService.save(serviceMapper.toModel(requestDto)));
     }
 
     @PutMapping("/{id}")
@@ -37,16 +37,16 @@ public class ServiceController {
                                      @RequestBody @Valid ServiceRequestDto requestDto) {
         Service service = serviceMapper.toModel(requestDto);
         service.setId(id);
-        return serviceMapper.toDto(serviceService.update(service));
+        return serviceMapper.toDto(serviceService.save(service));
     }
 
-    @PutMapping("/status/{id}")
+    @PutMapping("/{id}/status")
     @ApiOperation(value = "Update the status of a service",
             notes = "Updates the wasPaidToMechanic status of a service")
     public ServiceResponseDto updateStatus(@PathVariable Long id,
                                            @RequestBody @ServiceStatus String status) {
         Service service = serviceService.findById(id);
         service.setStatus(Service.Status.getStatus(status.toLowerCase()));
-        return serviceMapper.toDto(serviceService.update(service));
+        return serviceMapper.toDto(serviceService.save(service));
     }
 }

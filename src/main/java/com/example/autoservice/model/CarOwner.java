@@ -15,8 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CarOwner extends Person {
-    @OneToMany(mappedBy = "carOwner",
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "carOwner", orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
     @OneToMany
     @JoinColumn(name = "car_owner_id")
@@ -24,7 +23,6 @@ public class CarOwner extends Person {
 
     public void addCar(Car car) {
         cars.add(car);
-        car.setCarOwner(this);
     }
 
     public void addAllCars(List<Car> newCars) {

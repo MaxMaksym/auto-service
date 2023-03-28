@@ -1,16 +1,18 @@
 package com.example.autoservice.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "services")
@@ -24,6 +26,7 @@ public class Service {
     private BigDecimal price;
     @ManyToOne(fetch = FetchType.LAZY)
     private Mechanic mechanic;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public enum Status {

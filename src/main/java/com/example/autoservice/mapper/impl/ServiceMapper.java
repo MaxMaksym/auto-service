@@ -22,7 +22,6 @@ public class ServiceMapper implements
         service.setName(requestDto.getName());
         service.setMechanic(mechanicService.findById(requestDto.getMechanicId()));
         service.setPrice(requestDto.getPrice());
-        service.setStatus(Service.Status.getStatus(requestDto.getStatus()));
         return service;
     }
 

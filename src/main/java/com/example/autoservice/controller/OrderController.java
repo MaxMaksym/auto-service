@@ -30,7 +30,7 @@ public class OrderController {
     @ApiOperation(value = "Add a new order",
             notes = "Adds a new order with the specified details.")
     public OrderResponseDto add(@RequestBody @Valid OrderRequestDto requestDto) {
-        return orderMapper.toDto(orderService.add(orderMapper.toModel(requestDto)));
+        return orderMapper.toDto(orderService.save(orderMapper.toModel(requestDto)));
     }
 
     @PostMapping("/{id}/products")

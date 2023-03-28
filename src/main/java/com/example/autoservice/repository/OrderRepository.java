@@ -1,7 +1,6 @@
 package com.example.autoservice.repository;
 
 import com.example.autoservice.model.Order;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import lombok.NonNull;
@@ -30,18 +29,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             + "LEFT JOIN FETCH o.products "
             + "WHERE co.id = :carOwnerId")
     List<Order> findAllByCarOwnerId(@Param("carOwnerId") Long carOwnerId);
-
-    @Query("SELECT SUM(s.price) "
-            + "FROM Order o "
-            + "LEFT JOIN o.services s "
-            + "WHERE o.id = :id")
-    BigDecimal getServicesPrice(@Param("id") Long id);
-
-    @Query("SELECT SUM(p.price) "
-            + "FROM Order o "
-            + "LEFT JOIN o.products p "
-            + "WHERE o.id = :id")
-    BigDecimal getProductsPrice(@Param("id") Long id);
 
     @Transactional
     @Modifying

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface CarOwnerRepository extends JpaRepository<CarOwner, Long> {
-    @Query(" SELECT COUNT(or) "
+    @Query("SELECT COUNT(or) "
             + "FROM Order o "
             + "JOIN o.car c "
             + "JOIN c.carOwner co "

@@ -27,7 +27,7 @@ public class CarController {
             notes = "Creates and returns a new car "
                     + "based on the information provided in the request body.")
     public CarResponseDto add(@RequestBody @Valid CarRequestDto requestDto) {
-        return carMapper.toDto(carService.add(carMapper.toModel(requestDto)));
+        return carMapper.toDto(carService.save(carMapper.toModel(requestDto)));
     }
 
     @PutMapping("/{id}")
@@ -37,6 +37,6 @@ public class CarController {
                                  @RequestBody @Valid CarRequestDto requestDto) {
         Car car = carMapper.toModel(requestDto);
         car.setId(id);
-        return carMapper.toDto(carService.update(car));
+        return carMapper.toDto(carService.save(car));
     }
 }

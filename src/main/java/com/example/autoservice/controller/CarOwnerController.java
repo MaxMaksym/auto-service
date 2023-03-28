@@ -34,7 +34,7 @@ public class CarOwnerController {
     @ApiOperation(value = "Add a new car owner",
             notes = "Adds a new car owner with the specified details.")
     public CarOwnerResponseDto add(@RequestBody @Valid CarOwnerRequestDto requestDto) {
-        return carOwnerMapper.toDto(carOwnerService.add(carOwnerMapper.toModel(requestDto)));
+        return carOwnerMapper.toDto(carOwnerService.save(carOwnerMapper.toModel(requestDto)));
     }
 
     @PutMapping("/{id}")
@@ -44,7 +44,7 @@ public class CarOwnerController {
                                       @RequestBody @Valid CarOwnerRequestDto requestDto) {
         CarOwner carOwner = carOwnerMapper.toModel(requestDto);
         carOwner.setId(id);
-        return carOwnerMapper.toDto(carOwnerService.update(carOwner));
+        return carOwnerMapper.toDto(carOwnerService.save(carOwner));
     }
 
     @GetMapping("/{id}/orders")

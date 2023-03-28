@@ -4,7 +4,6 @@ import com.example.autoservice.lib.ServiceStatus;
 import com.example.autoservice.model.Service;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.util.Arrays;
 
 public class ServiceStatusValidator implements ConstraintValidator<ServiceStatus, String> {

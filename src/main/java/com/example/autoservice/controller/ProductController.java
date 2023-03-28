@@ -26,7 +26,7 @@ public class ProductController {
     @ApiOperation(value = "Add a new product",
             notes = "Adds a new product with the specified details.")
     public ProductResponseDto add(@RequestBody @Valid ProductRequestDto requestDto) {
-        return productMapper.toDto(productService.add(productMapper.toModel(requestDto)));
+        return productMapper.toDto(productService.save(productMapper.toModel(requestDto)));
     }
 
     @PutMapping("/{id}")
@@ -36,6 +36,6 @@ public class ProductController {
                                      @RequestBody @Valid ProductRequestDto requestDto) {
         Product product = productMapper.toModel(requestDto);
         product.setId(id);
-        return productMapper.toDto(productService.update(product));
+        return productMapper.toDto(productService.save(product));
     }
 }

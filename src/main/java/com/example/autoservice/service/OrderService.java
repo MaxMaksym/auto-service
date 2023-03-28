@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface OrderService extends GenericService<Order> {
+    Order update(Order order);
+
     BigDecimal getTotalPrice(Long id);
 
     List<Order> findAllByCarOwnerId(Long carOwnerId);

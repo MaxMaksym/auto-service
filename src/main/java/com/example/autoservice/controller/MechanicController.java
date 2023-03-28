@@ -28,7 +28,7 @@ public class MechanicController {
     @ApiOperation(value = "Add a new mechanic",
             notes = "Adds a new mechanic with the specified details.")
     public MechanicResponseDto add(@RequestBody @Valid MechanicRequestDto requestDto) {
-        return mechanicMapper.toDto(mechanicService.add(mechanicMapper.toModel(requestDto)));
+        return mechanicMapper.toDto(mechanicService.save(mechanicMapper.toModel(requestDto)));
     }
 
     @PutMapping("/{id}")
@@ -38,7 +38,7 @@ public class MechanicController {
                                       @RequestBody @Valid MechanicRequestDto requestDto) {
         Mechanic mechanic = mechanicMapper.toModel(requestDto);
         mechanic.setId(id);
-        return mechanicMapper.toDto(mechanicService.update(mechanic));
+        return mechanicMapper.toDto(mechanicService.save(mechanic));
     }
 
     @GetMapping("/{id}/salary")

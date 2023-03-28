@@ -21,16 +21,20 @@ public class CarOwnerServiceImpl implements CarOwnerService {
     }
 
     @Override
-    public CarOwner add(CarOwner carOwner) {
+    public CarOwner save(CarOwner carOwner) {
         CarOwner carOwnerFromDb = carOwnerRepository.save(carOwner);
-        carOwnerFromDb.getCars().forEach(carService::update);
+        carOwnerFromDb.getCars().forEach(car -> car.setCarOwner(carOwnerFromDb));
+        carOwnerFromDb.getCars().forEach(carService::save);
         return carOwnerFromDb;
     }
 
     @Override
-    public CarOwner update(CarOwner carOwner) {
-        CarOwner carOwnerFromDb = carOwnerRepository.save(carOwner);
-        carOwnerFromDb.getCars().forEach(carService::update);
-        return carOwnerFromDb;
+    public void addOrderToOwner(Long orderId, Long ownerId) {
+        carOwnerRepository.addOrderToOwner(orderId, ownerId);
+    }
+
+    @Override
+    public int getAmountOfCarOwnerOrders(Long id) {
+        return carOwnerRepository.getAmountOfCarOwnerOrders(id);
     }
 }

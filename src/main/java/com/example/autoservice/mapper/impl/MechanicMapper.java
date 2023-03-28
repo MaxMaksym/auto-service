@@ -6,7 +6,6 @@ import com.example.autoservice.mapper.RequestDtoMapper;
 import com.example.autoservice.mapper.ResponseDtoMapper;
 import com.example.autoservice.model.Mechanic;
 import com.example.autoservice.model.Service;
-import com.example.autoservice.service.OrderService;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class MechanicMapper implements RequestDtoMapper<MechanicRequestDto, Mechanic>,
         ResponseDtoMapper<MechanicResponseDto, Mechanic> {
-    private final OrderService orderService;
-
     @Override
     public Mechanic toModel(MechanicRequestDto requestDto) {
         Mechanic mechanic = new Mechanic();
